@@ -1,5 +1,5 @@
 import { Cluster } from 'ioredis';
-import { RateLimitStore } from '../types';
+import { RateLimitStore } from './store.js';
 
 export class RedisRateLimitStore implements RateLimitStore {
   private redis: Cluster;

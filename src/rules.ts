@@ -1,4 +1,4 @@
-import { HTTPMethod, Rule, httpMethods } from './types';
+import { HTTPMethod, Rule, httpMethods } from './types.js';
 
 export type RuleCallbackMatcher = (path: string) => Rule | undefined;
 

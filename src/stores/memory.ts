@@ -1,4 +1,4 @@
-import { RateLimitStore } from '../types';
+import { RateLimitStore } from './store.js';
 
 export class MemoryRateLimitStore implements RateLimitStore {
   private memory: Map<string, number>;
@@ -37,5 +37,13 @@ export class MemoryRateLimitStore implements RateLimitStore {
     }
 
     return newValue;
+  }
+
+  /**
+   * Clear all keys from the store. This is only used for testing.
+   */
+  public clearAll(): void {
+    this.memory.clear();
+    this.deletionsScheduled.clear();
   }
 }

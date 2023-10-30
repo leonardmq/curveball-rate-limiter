@@ -1,9 +1,9 @@
 import { Middleware } from '@curveball/kernel';
 import { TooManyRequests } from '@curveball/http-errors';
 
-import { RateLimitSettings, HTTPMethod } from './types';
-import { RuleSet } from './rules';
-import { RateLimitFactory } from './rate-limit';
+import { RateLimitSettings, HTTPMethod } from './types.js';
+import { RuleSet } from './rules.js';
+import { RateLimitFactory } from './rate-limit.js';
 
 const DEFAULT_TOO_MANY_REQUESTS_MESSAGE = 'Too many requests.';
 

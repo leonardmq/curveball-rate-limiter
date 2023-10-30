@@ -1,6 +1,7 @@
 import { Context } from '@curveball/kernel';
-import { millisecondsToSeconds } from './time';
-import { RateLimitAlgorithm, Rule, RateLimitStore } from './types';
+import { millisecondsToSeconds } from './time.js';
+import { RateLimitAlgorithm, Rule } from './types.js';
+import { RateLimitStore } from './stores/index.js';
 
 export interface RateLimiterCheckResult {
   /**

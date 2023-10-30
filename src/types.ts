@@ -1,5 +1,7 @@
 import { Context } from '@curveball/kernel';
 
+import { RateLimitStore } from './stores/index.js';
+
 export type RateLimitAlgorithm = 'fixed-window';
 
 export type HTTPMethod =
@@ -26,17 +28,6 @@ export const httpMethods: HTTPMethod[] = [
 ];
 
 export type PathMatcher = (path: string) => boolean;
-
-export interface RateLimitStore {
-  /**
-   * Increment the value of the key by 1 and return the new value.
-   * If the key does not exist, create it with a value of 1.
-   *
-   * @param key The key to increment
-   * @param ttl The time to live in seconds
-   */
-  increment(key: string, ttl: number): Promise<number>;
-}
 
 export type RateLimitSettings = {
   /**

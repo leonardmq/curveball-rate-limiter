@@ -1,2 +1,4 @@
-export { RedisRateLimitStore } from './redis';
-export { MemoryRateLimitStore } from './memory';
+export { RateLimitStore } from './store.js';
+
+export { RedisRateLimitStore } from './redis.js';
+export { MemoryRateLimitStore } from './memory.js';
