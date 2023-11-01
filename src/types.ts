@@ -67,7 +67,7 @@ export type Rule = {
   /**
    * The time window in milliseconds.
    */
-  window: number;
+  windowSize: number;
 
   /**
    * The message to return when the limit is exceeded.
@@ -77,10 +77,11 @@ export type Rule = {
   message?: string;
 
   /**
-   * A function that returns a string that is used to group requests together.
-   * For example, you could group requests by IP address.
+   * A function that returns a string identifier for the actor that made the request.
+   *
+   * For example, the IP address of the client, or the user id of the authenticated user.
    */
-  getGroupIdentifier: (ctx: Context) => string;
+  getActor: (ctx: Context) => string;
 
   /*
    * A function that returns a boolean that is used to determine if the rate limit should be applied.
