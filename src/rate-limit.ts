@@ -51,13 +51,13 @@ export class FixedWindowRateLimiter implements RateLimiter {
   /**
    * Returns the timestamp of the end of the window with the given index.
    *
-   * @param windowIdx The index of the window.
+   * @param ts The timestamp in milliseconds.
    * @param windowSize The size of the window in milliseconds.
    * @returns The timestamp of the end of the window.
    */
-  private getWindowEnd(windowStart: number, windowSize: number): number {
+  private getWindowEnd(ts: number, windowSize: number): number {
     // the end of the window is the start of the next window
-    return windowStart + windowSize;
+    return this.getWindowStart(ts, windowSize) + windowSize;
   }
 
   public async check(
@@ -69,7 +69,7 @@ export class FixedWindowRateLimiter implements RateLimiter {
 
     const windowSize = rule.windowSize;
     const currWindowStart = this.getWindowStart(now, windowSize);
-    const currWindowEnd = this.getWindowEnd(currWindowStart, windowSize);
+    const currWindowEnd = this.getWindowEnd(now, windowSize);
 
     const key = `${actor}:${endpoint}:${currWindowStart}`;
 

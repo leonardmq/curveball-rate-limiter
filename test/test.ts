@@ -24,14 +24,20 @@ describe('FixedWindowRateLimiter', () => {
     store.clearAll();
   });
 
-  it('should correctly identify window index', () => {
-    const idx = rateLimiter['getWindowIdx'](0, 60000);
-    expect(idx).to.be.equal(0);
+  it('should correctly identify window', () => {
+    const timestamp = 1000000;
+    const windowSize = 60000;
+    const expectedStart = 960000; // 60,000 * 16
+    const windowStart = rateLimiter['getWindowStart'](timestamp, windowSize);
+    expect(windowStart).to.be.equal(expectedStart);
   });
 
   it('should correctly identify window end', () => {
-    const end = rateLimiter['getWindowEnd'](1, 60000);
-    expect(end).to.be.equal(60000 + 60000);
+    const timestamp = 1000000;
+    const windowSize = 60000;
+    const expected = 1020000; // 60,000 * 17
+    const end = rateLimiter['getWindowEnd'](timestamp, windowSize);
+    expect(end).to.be.equal(expected);
   });
 
   it('should return isOveruse as true when over limit', async () => {
@@ -49,10 +55,10 @@ describe('FixedWindowRateLimiter', () => {
 
     const rule: Rule = {
       limit: 10,
-      window: 60000,
+      windowSize: 60000,
       path: '',
       method: 'GET',
-      getGroupIdentifier: function (ctx: Context<any, any>): string {
+      getActor: function (ctx: Context<any, any>): string {
         return ctx.ip(true) || '';
       },
     };
@@ -83,10 +89,10 @@ describe('FixedWindowRateLimiter', () => {
 
     const rule: Rule = {
       limit: 15,
-      window: 60000,
+      windowSize: 60000,
       path: '',
       method: 'GET',
-      getGroupIdentifier: function (ctx: Context<any, any>): string {
+      getActor: function (ctx: Context<any, any>): string {
         return ctx.ip(true) || '';
       },
     };
